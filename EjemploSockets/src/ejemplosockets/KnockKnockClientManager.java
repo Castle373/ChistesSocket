@@ -14,37 +14,52 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class KnockKnockClientManager implements Runnable {
+
     private Socket clientSocket;
     private KnockKnockProtocol kkp;
-    
-    public KnockKnockClientManager(Socket c){
+    private KnockKnockProxy proxy;
+    private boolean salir=true;
+
+    public KnockKnockClientManager(Socket c) {
         this.clientSocket = c;
         this.kkp = new KnockKnockProtocol();
+        
     }
-    
-    @Override
+
     public void run() {
+        this.proxy=new KnockKnockProxy(kkp, this);
         try {
-            PrintWriter out = null;
-            BufferedReader in = null;
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            String inputLine, outputLine;            
-            outputLine = kkp.processInput(null);// este es Knock! Knock!
-            out.println(outputLine); // se la mando al cliente en especifico o sea al socket
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            String inputLine;
+            proxy.enviarMensaje(null);
             while ((inputLine = in.readLine()) != null) {
-                
-                outputLine = kkp.processInput(inputLine);
-                out.println(outputLine);//me escribio bye
-                if (outputLine.equals("Bye."))
+                // Utiliza el proxy para manejar la comunicación
+                proxy.enviarMensaje(inputLine);
+
+                if (salir==false) {     
                     break;
-                
-            }   out.close();
+                }
+            }
+
             in.close();
             clientSocket.close();
         } catch (IOException ex) {
             Logger.getLogger(KnockKnockClientManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+   
+    public void enviarMensaje(String mensaje) {
+        if(mensaje.equals("Bye.")){
+            salir=false;
+        }
+        try {
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+            out.println(mensaje);
+        } catch (IOException ex) {
+            Logger.getLogger(KnockKnockClientManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     
 }
