@@ -20,6 +20,7 @@ public class KnockKnockClientManager implements Runnable {
     public KnockKnockClientManager(Socket c){
         this.clientSocket = c;
         this.kkp = new KnockKnockProtocol();
+        
     }
     
     @Override

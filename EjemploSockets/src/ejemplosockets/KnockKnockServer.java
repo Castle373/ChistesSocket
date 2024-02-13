@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 
 /**
@@ -24,11 +26,12 @@ public class KnockKnockServer {
             ServerSocket serverSocket = null;
             serverSocket = new ServerSocket(4444);
 	    System.out.println("Ya estoy escuchando");
-            Socket clientSocket = null;
+            Executor service = Executors.newCachedThreadPool();
+            
             while (true){
-                clientSocket = serverSocket.accept();
+                Socket clientSocket = serverSocket.accept();
                 System.out.println("Acepté a un cliente");
-                new Thread(new KnockKnockClientManager(clientSocket)).start();                                
+                service.execute(new KnockKnockClientManager(clientSocket));                new Thread().start();                                
             }                                    
         } catch (IOException e) {
             System.err.println("Could not listen on port: 4444.");
