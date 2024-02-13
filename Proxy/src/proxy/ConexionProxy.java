@@ -9,5 +9,5 @@ package proxy;
  * @author diego
  */
 public interface ConexionProxy {
-    public void enviarMensaje();
+    public void enviarMensaje(String mensaje);
 }
