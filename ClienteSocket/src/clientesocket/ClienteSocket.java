@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author gilberto.borrego
+ * @author diego, marcos, carmen,oscar 
  */
 public class ClienteSocket {
 
@@ -25,34 +25,24 @@ public class ClienteSocket {
      */
     public static void main(String[] args) {
         Socket kkSocket = null;
-        PrintWriter out = null;
-        BufferedReader in = null;
+        Stub stub = null;
+
         try {
             kkSocket = new Socket("localhost", 4444);
-            out = new PrintWriter(kkSocket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
-            BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-            String fromServer;
+            SocketCliente cliente = new SocketCliente(kkSocket);
+           
+            stub = new Stub(cliente);
+            BufferedReader scanner = new BufferedReader(new InputStreamReader(System.in));
             String fromUser;
-            while ((fromServer = in.readLine()) != null) {
-                System.out.println("Server: " + fromServer);
-                if (fromServer.equals("Bye."))
-                    break;
-                
-                fromUser = stdIn.readLine();
-                if (fromUser != null) {
-                    System.out.println("Client: " + fromUser);
-                    out.println(fromUser);
-                }
-            }
-            out.close();
-            in.close();
-            stdIn.close();
-            kkSocket.close();            
+            
+            Cliente c = new Cliente(stub,scanner);
+            cliente.agregarObserver(c);
+            cliente.start();
+            
         } catch (IOException ex) {
             Logger.getLogger(ClienteSocket.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
+
 }

@@ -13,6 +13,10 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author diego, marcos, carmen,oscar
+ */
 public class KnockKnockClientManager implements Runnable {
 
     private Socket clientSocket;

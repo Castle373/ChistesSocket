@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
 
 /**
  *
- * @author gilberto.borrego
+ * @author diego, marcos, carmen,oscar
  */
 public class KnockKnockServer {
 
@@ -31,7 +31,7 @@ public class KnockKnockServer {
             while (true){
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Acepté a un cliente");
-                service.execute(new KnockKnockClientManager(clientSocket));                new Thread().start();                                
+                service.execute(new KnockKnockClientManager(clientSocket));new Thread().start();                                
             }                                    
         } catch (IOException e) {
             System.err.println("Could not listen on port: 4444.");

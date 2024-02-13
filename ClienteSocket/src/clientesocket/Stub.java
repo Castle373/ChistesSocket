@@ -4,10 +4,22 @@
  */
 package clientesocket;
 
+import proxy.ConexionProxy;
+
 /**
  *
- * @author diego
+ * @author diego, marcos, carmen,oscar 
  */
-public class Stub {
+public class Stub implements ConexionProxy{
+
+    public SocketCliente socket;
+    public Stub(SocketCliente socket) {
+        this.socket=socket;
+    }
+    @Override
+    public void enviarMensaje(String string) {
+        socket.enviarAlServidor(string);
+        
+    }
     
 }

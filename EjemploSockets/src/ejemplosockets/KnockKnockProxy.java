@@ -8,7 +8,7 @@ import proxy.ConexionProxy;
 
 /**
  *
- * @author oscar
+ * @author diego, marcos, carmen,oscar
  */
 public class KnockKnockProxy implements ConexionProxy {
 

@@ -7,7 +7,7 @@ package ejemplosockets;
 
 /**
  *
- * @author gilberto.borrego
+ * @author diego, marcos, carmen,oscar 
  */
 public class KnockKnockProtocol {
     private static final int WAITING = 0;

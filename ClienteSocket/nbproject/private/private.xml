@@ -5,5 +5,10 @@
         <group>
             <file>file:/C:/Users/DELL/Documents/ITSON/ISW/Arquitectura%20de%20SW/Unidad%202/EjemploSockets/ClienteSocket/src/clientesocket/ClienteSocket.java</file>
         </group>
+        <group name="ChistesSocket">
+            <file>file:/C:/Users/diego/OneDrive/Documentos/GitHub/ChistesSocket/ClienteSocket/src/clientesocket/ClienteSocket.java</file>
+            <file>file:/C:/Users/diego/OneDrive/Documentos/GitHub/ChistesSocket/ClienteSocket/src/clientesocket/SocketCliente.java</file>
+            <file>file:/C:/Users/diego/OneDrive/Documentos/GitHub/ChistesSocket/ClienteSocket/src/clientesocket/Stub.java</file>
+        </group>
     </open-files>
 </project-private>
